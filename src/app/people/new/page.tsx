@@ -1,9 +1,33 @@
-const page = () => {
+import { db } from '@/db';
+import { redirect } from 'next/navigation';
+
+const AddPersonPage = () => {
+  const addPerson = async (formData: FormData) => {
+    'use server';
+    // This needs to be a server action
+
+    // Check the user's input and make sure it is valid
+    const firstName = formData.get('firstName') as string;
+    const lastName = formData.get('lastName') as string;
+    const age = formData.get('age') as string;
+    // Create new record in database
+    const person = await db.person.create({
+      data: {
+        firstName,
+        lastName,
+        age,
+      },
+    });
+    console.log(person, 'person');
+    // Redirect user back to root route
+    redirect('/');
+  };
+
   return (
     <>
       <h1 className='text-5xl text-center font-bold mt-20'>Community</h1>
       <p className='text-md text-center'>Add a new person to the community</p>
-      <form className='mt-10'>
+      <form className='mt-10' action={addPerson}>
         <div>
           <label
             htmlFor='firstName'
@@ -68,4 +92,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default AddPersonPage;
