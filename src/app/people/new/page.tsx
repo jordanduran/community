@@ -1,7 +1,7 @@
 const page = () => {
   return (
     <>
-      <h1 className='text-5xl text-center mt-20'>Community</h1>
+      <h1 className='text-5xl text-center font-bold mt-20'>Community</h1>
       <p className='text-md text-center'>Add a new person to the community</p>
       <form className='mt-10'>
         <div>
