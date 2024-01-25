@@ -1,14 +1,27 @@
 'use client';
 import type { Person } from '@prisma/client';
 import { editPerson } from '@/actions';
+import { useState } from 'react';
 
 interface PersonEditFormProps {
   person: Person;
 }
 
 const PersonEditForm = ({ person }: PersonEditFormProps) => {
+  const [firstName, setFirstName] = useState(person.firstName);
+  const [lastName, setLastName] = useState(person.lastName);
+  const [age, setAge] = useState(person.age);
+
+  const editPersonAction = editPerson.bind(
+    null,
+    person.id,
+    firstName,
+    lastName,
+    age
+  );
+
   return (
-    <form className='mt-10'>
+    <form className='mt-10' action={editPersonAction}>
       <div>
         <label
           htmlFor='firstName'
@@ -23,7 +36,8 @@ const PersonEditForm = ({ person }: PersonEditFormProps) => {
             id='firstName'
             className='border rounded p-2 w-full mb-5'
             placeholder='John'
-            value={person.firstName}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
       </div>
@@ -42,7 +56,8 @@ const PersonEditForm = ({ person }: PersonEditFormProps) => {
             id='lastName'
             className='border rounded p-2 w-full mb-5'
             placeholder='Doe'
-            value={person.lastName}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
       </div>
@@ -61,7 +76,8 @@ const PersonEditForm = ({ person }: PersonEditFormProps) => {
             id='age'
             className='border rounded p-2 w-full mb-5'
             placeholder='30'
-            value={person.age}
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
           />
         </div>
       </div>

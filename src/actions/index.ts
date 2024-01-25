@@ -1,7 +1,12 @@
 'use server';
 
 import {db} from '@/db';
+import { redirect } from 'next/navigation';
 
-export const editPerson = async () => {
-  console.log('Edit person called')
+export const editPerson = async (id: number, firstName: string, lastName: string, age: string) => {
+  await db.person.update({
+    where: {id},
+    data: { firstName, lastName, age}
+  })
+  redirect(`/people/${id}`);
 }
