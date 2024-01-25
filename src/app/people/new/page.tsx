@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { db } from '@/db';
 import { redirect } from 'next/navigation';
 
@@ -88,6 +89,14 @@ const AddPersonPage = () => {
           Add
         </button>
       </form>
+      <Link href='/'>
+        <button
+          type='button'
+          className='border rounded p-2 w-full mt-2 hover:bg-gray-100'
+        >
+          Back
+        </button>
+      </Link>
     </>
   );
 };
