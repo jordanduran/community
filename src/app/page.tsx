@@ -1,5 +1,17 @@
-import Image from 'next/image';
+import { db } from '@/db';
 
-export default function Home() {
-  return <h1>Homepage</h1>;
-}
+const Home = async () => {
+  const people = await db.person.findMany();
+  const renderedPeople = people.map((person) => {
+    return <div key={person.id}>{person.firstName}</div>;
+  });
+
+  return (
+    <>
+      <h1>Homepage</h1>
+      {renderedPeople}
+    </>
+  );
+};
+
+export default Home;
