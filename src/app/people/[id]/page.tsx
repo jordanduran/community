@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { db } from '@/db';
+import { deletePerson } from '@/actions';
 
 interface DisplayPersonPageProps {
   params: {
@@ -16,6 +17,8 @@ const DisplayPersonPage = async (props: DisplayPersonPageProps) => {
   if (!person) {
     return notFound();
   }
+
+  const deletePersonAction = deletePerson.bind(null, person.id);
 
   return (
     <>
@@ -40,12 +43,11 @@ const DisplayPersonPage = async (props: DisplayPersonPageProps) => {
           >
             Edit
           </Link>
-          <button
-            type='button'
-            className='border rounded py-2 px-10  w-full mt-5 bg-red-500 hover:bg-red-600'
-          >
-            Delete
-          </button>
+          <form action={deletePersonAction}>
+            <button className='border rounded py-2 px-10  w-full mt-5 bg-red-500 hover:bg-red-600'>
+              Delete
+            </button>
+          </form>
         </div>
         <Link
           href='/'

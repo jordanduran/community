@@ -26,7 +26,10 @@ const Home = async () => {
       <h1 className='text-5xl text-center font-bold mt-20'>Community Board</h1>
       {renderedPeople}
       <div className='flex mt-5 justify-between items-center'>
-        <Link href='/people/new' className='border p-2 rounded bg-blue-500 text-white hover:bg-blue-600'>
+        <Link
+          href='/people/new'
+          className='border p-2 rounded bg-blue-500 text-white hover:bg-blue-600'
+        >
           Add new person
         </Link>
       </div>
